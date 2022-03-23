@@ -1,3 +1,4 @@
+// Cipher Number: 0 ,Cipher Name: Affine Cipher, Author: Mohamed Hussein Hassan, ID: 20210335.
 #include <iostream>
 #include <string>
 #include <Windows.h>
