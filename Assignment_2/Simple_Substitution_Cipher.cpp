@@ -25,7 +25,7 @@ void program();                                       // Done.
 
 int main()
 {
-    // program();
+    program();
     return 0;
 }
 
