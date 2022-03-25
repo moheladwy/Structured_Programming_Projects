@@ -5,26 +5,28 @@ using namespace std;
 
 string first_number = "", _operator_ = "", second_number = "";
 
-string get_input(); // Done.
-string make_lowerCase(string message); // Done.
+string get_input();							 // Done.
+string make_lowerCase(string message);		 // Done.
 bool check_spaces_in_input(string equation); // Done.
-void split_input(string equation); // Done.
-bool check_numbers(string number); // Done.
-bool check_operator(string _operator_); // Done.
-bool check_backslach(string number); // Done.
-double mini_split(string nuber); // Done.
-void program(); // Done.
+void split_input(string equation);			 // Done.
+bool check_numbers(string number);			 // Done.
+bool check_operator(string _operator_);		 // Done.
+bool check_backslach(string number);		 // Done.
+double mini_split(string nuber);			 // Done.
+void program();								 // Done.
 
-void as_fraction(double number, int cycles = 10, double precision = 5e-4) {
+void as_fraction(double number, int cycles = 10, double precision = 5e-4)
+{
 	int sign = number >= 0 ? 1 : -1;
-	number = number * sign; //abs(number);
+	number = number * sign; // abs(number);
 	double new_number, whole_part;
 	double decimal_part = number - (int)number;
 	int counter = 0;
 
-	valarray<double> vec_1{ double((int)number), 1 }, vec_2{ 1,0 }, temporary;
+	valarray<double> vec_1{double((int)number), 1}, vec_2{1, 0}, temporary;
 
-	while (decimal_part > precision && counter < cycles) {
+	while (decimal_part > precision && counter < cycles)
+	{
 		new_number = 1 / decimal_part;
 		whole_part = (int)new_number;
 
@@ -51,7 +53,7 @@ int main()
 	return 0;
 }
 
-string get_input() 
+string get_input()
 {
 	string equation;
 	equation = "";
@@ -121,7 +123,7 @@ void split_input(string equation)
 			break;
 		}
 	}
-	for ( i;i < equation.length(); i++)
+	for (i; i < equation.length(); i++)
 	{
 
 		if (equation[i] != ' ')
@@ -219,7 +221,8 @@ double mini_split(string number)
 	if (check_backslach(number))
 	{
 		string mini_first_number, mini_second_number;
-		long double num1, num2;int i = 0;
+		long double num1, num2;
+		int i = 0;
 		for (; i < number.length(); i++)
 		{
 			if (number[i] != '/')
@@ -233,7 +236,7 @@ double mini_split(string number)
 			}
 		}
 
-		for (;i < number.length(); i++)
+		for (; i < number.length(); i++)
 		{
 
 			mini_second_number += number[i];
@@ -247,62 +250,77 @@ double mini_split(string number)
 		result = stold(number);
 	}
 	return result;
-
 }
 
 void program()
 {
-	cout << "Ahlan ya user ya habeby, Please Enter Your Calculation as Follows => " << "{Number 1 => (+ , - , / , *) => Number 2}." << "\n";
-	cout << "There have to be Spaces between the First Number, the operation and the Second Number then Enter.\n" << "Numbers can be Rationals as (x/y) or Integers as (z).\n";
-	string equation; 
+	cout << "Ahlan ya user ya habeby, Please Enter Your Calculation as Follows => "
+		 << "{Number 1 => (+ , - , / , *) => Number 2}."
+		 << "\n";
+	cout << "There have to be Spaces between the First Number, the operation and the Second Number then Enter.\n"
+		 << "Numbers can be Rationals as (x/y) or Integers as (z).\n";
+	string equation;
 	bool num1_stat, num2_stat, operation_stat;
 	long double number1, number2, result;
 	while (true)
 	{
-		while (true) {
-			equation = get_input();
-			equation = make_lowerCase(equation);
-			if (equation == "exit") {
-				break;
-			}
-			else if (check_spaces_in_input(equation)) {
-				split_input(equation);
-				num1_stat = check_numbers(first_number);
-				num2_stat = check_numbers(second_number);
-				operation_stat = check_operator(_operator_);
-				if (num1_stat && num2_stat && operation_stat) {
-					number1 = mini_split(first_number);
-					number2 = mini_split(second_number);
-					if (_operator_ == "/" && number2 == 0) {
-						cout << "Can't didvide by 0, try again with different operator or different Denumenator.\n";
-					}
-					else {
-						if (_operator_ == "+") {
-							result = number1 + number2;
-						}
-						else if (_operator_ == "-") {
-							result = number1 - number2;
-						}
-						else if (_operator_ == "*") {
-							result = number1 * number2;
-						}
-						else {
-							result = number1 / number2;
-						}
-						cout << "The result = "; as_fraction(result);
-						first_number = ""; _operator_ = ""; second_number = "";
-					}
+		equation = get_input();
+		equation = make_lowerCase(equation);
+		if (equation == "exit")
+		{
+			break;
+		}
+		else if (check_spaces_in_input(equation))
+		{
+			split_input(equation);
+			num1_stat = check_numbers(first_number);
+			num2_stat = check_numbers(second_number);
+			operation_stat = check_operator(_operator_);
+			if (num1_stat && num2_stat && operation_stat)
+			{
+				number1 = mini_split(first_number);
+				number2 = mini_split(second_number);
+				if (_operator_ == "/" && number2 == 0)
+				{
+					cout << "Can't didvide by 0, try again with different operator or different Denumenator.\n";
 				}
-				else {
-					first_number = ""; _operator_ = ""; second_number = "";
-					cout << "Please Enter a Valid Input.\n";
+				else
+				{
+					if (_operator_ == "+")
+					{
+						result = number1 + number2;
+					}
+					else if (_operator_ == "-")
+					{
+						result = number1 - number2;
+					}
+					else if (_operator_ == "*")
+					{
+						result = number1 * number2;
+					}
+					else
+					{
+						result = number1 / number2;
+					}
+					cout << "The result = ";
+					as_fraction(result);
+					first_number = "";
+					_operator_ = "";
+					second_number = "";
 				}
 			}
-			else {
-				cout << "Enter the Equation that following (a/b operation c/d), the numbers and the operation must be seperated by space.\n";
+			else
+			{
+				first_number = "";
+				_operator_ = "";
+				second_number = "";
+				cout << "Please Enter a Valid Input.\n";
 			}
 		}
-		break;
+		else
+		{
+			cout << "Enter the Equation that following (a/b operation c/d), the numbers and the operation must be seperated by space.\n";
+		}
 	}
 	cout << "Thank you for using rational number calculator.\n";
 }
