@@ -1,3 +1,12 @@
+/*
+Author Name: Mohamed Hussein Hassan Mohamed
+ID: 20210335
+Section: S17,S18
+Task Number: 4
+Problem Number: 14
+Program Description: I Suppose to Write a program to input the current time in the format hh:mm:ss and reject invalid
+inputs. Then calculate the seconds passed since the last midnight.
+*/
 #include <iostream>
 #include <string>
 using namespace std;

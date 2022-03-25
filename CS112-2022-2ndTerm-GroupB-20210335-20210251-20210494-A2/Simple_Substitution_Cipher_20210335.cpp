@@ -1,27 +1,36 @@
-// Cipher Number: 5 ,Cipher Name: Simple Substitution Cipher, Author: Mohamed Hussein Hassan, ID: 20210335.
+/*
+Author: Mohamed Hussein Hassan.
+ID: 20210335.
+Section: S17, S18.
+Task Number: 3.
+Cipher Number: 5.
+Cipher Name: Simple Substitution Cipher.
+Cipher Description: In this cipher, a replacement alphabet is used to replace each letter by another one,
+With Creating a general version that builds the cipher alphabet using a given key of 5 unique letters.
+The user enters the key to cipher a message and the same key to decipher the message.
+The cipher alphabet is built by adding the remaining 21 letters in order after the key letters.
+*/
 #include <iostream>
 #include <string>
-#include <Windows.h>
 using namespace std;
 
-char my_letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+char my_alphabet_letters[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 char my_key[5];
-char my_cipher[26];
+char my_cipher_letters[26];
 
-string get_key();                                     // Done.
-bool check_unique_key(string key);                    // Done.
-string make_lowerCase(string message);                // Done.
-string get_message();                                 // Done.
-bool check_valid_message(string message);             // Done.
-string choose_method();                               // Done.
-bool try_again();                                     // Done.
-void clear_screen();                                  // Done.
-bool check_arr(char letter);                          // Done.
-void general_Encryption(string key);                  // Done.
-int get_number_of_letter(char letter, string choose); // Done.
-string Decryption(string message);                    // Done.
-string Encryption(string message);                    // Done.
-void program();                                       // Done.
+string get_key();
+bool check_unique_key(string key);
+string make_lowerCase(string message);
+string get_message();
+bool check_valid_message(string message);
+string choose_method();
+bool try_again();
+bool check_array(char letter);
+void general_Encryption(string key);
+int get_number_of_letter(char letter, string choose);
+string Decryption(string message);
+string Encryption(string message);
+void program();
 
 int main()
 {
@@ -185,22 +194,7 @@ bool try_again()
     }
 }
 
-void clear_screen()
-{
-    HANDLE hndl = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    GetConsoleScreenBufferInfo(hndl, &csbi);
-    DWORD written;
-    DWORD n = csbi.dwSize.X * csbi.dwCursorPosition.Y + csbi.dwCursorPosition.X + 1;
-    COORD curhome = {0, 0};
-    FillConsoleOutputCharacter(hndl, ' ', n, curhome, &written);
-    csbi.srWindow.Bottom -= csbi.srWindow.Top;
-    csbi.srWindow.Top = 0;
-    SetConsoleWindowInfo(hndl, TRUE, &csbi.srWindow);
-    SetConsoleCursorPosition(hndl, curhome);
-}
-
-bool check_arr(char letter)
+bool check_array(char letter)
 {
     bool checker = true;
     for (int i = 0; i < 5; i++)
@@ -221,7 +215,7 @@ int get_number_of_letter(char letter, string choose)
     {
         for (number_of_letter = 0; number_of_letter < 26; number_of_letter++)
         {
-            if (letter == my_letters[number_of_letter])
+            if (letter == my_alphabet_letters[number_of_letter])
             {
                 break;
             }
@@ -231,7 +225,7 @@ int get_number_of_letter(char letter, string choose)
     {
         for (number_of_letter = 0; number_of_letter < 26; number_of_letter++)
         {
-            if (letter == my_cipher[number_of_letter])
+            if (letter == my_cipher_letters[number_of_letter])
             {
                 break;
             }
@@ -246,13 +240,13 @@ void general_Encryption(string key)
     for (int i = 0; i < 5; i++)
     {
         my_key[i] = key[i];
-        my_cipher[i] = my_key[i];
+        my_cipher_letters[i] = my_key[i];
     }
     for (int i = 0; i < 26; i++)
     {
-        if (check_arr(my_letters[i]))
+        if (check_array(my_alphabet_letters[i]))
         {
-            my_cipher[num + 5] = my_letters[i];
+            my_cipher_letters[num + 5] = my_alphabet_letters[i];
             num++;
         }
     }
@@ -271,7 +265,7 @@ string Encryption(string message)
         else
         {
             number_of_element = get_number_of_letter(message[i], "1");
-            encrypt_message += my_cipher[number_of_element];
+            encrypt_message += my_cipher_letters[number_of_element];
         }
     }
     return encrypt_message;
@@ -290,7 +284,7 @@ string Decryption(string message)
         else
         {
             number_of_element = get_number_of_letter(message[i], "2");
-            decrypt_message += my_letters[number_of_element];
+            decrypt_message += my_alphabet_letters[number_of_element];
         }
     }
     return decrypt_message;
@@ -328,7 +322,6 @@ void program()
         bool again = try_again();
         if (again)
         {
-            clear_screen();
             program();
             counter += 1;
         }

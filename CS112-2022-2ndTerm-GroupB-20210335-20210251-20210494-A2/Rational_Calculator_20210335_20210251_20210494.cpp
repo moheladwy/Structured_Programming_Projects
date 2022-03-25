@@ -1,3 +1,14 @@
+/*
+Authors: 1- Mohamed Hussein hassan. 2- Alialdin Mohamed Mostafa. 3- Yossein Hammed Mohamed
+ID's:    1- 20210335.               2- 20210291.                 3- 20210494.
+Section: 1- S17.                    2- S17.                      3- S15.
+Task Number: 5
+Problem Number: 1
+Problem Name: Rational Number Calculator
+Problem Description: In this application We Must create a rational number calculator that is capable of taking two
+rational numbers and an operation to perform on them. Our Program should handle cases of –ve numbers and nominator without denominator.
+It should also use defensive programming to reject bad inputs.
+*/
 #include <iostream>
 #include <string>
 #include <valarray>
@@ -5,16 +16,17 @@ using namespace std;
 
 string first_number = "", _operator_ = "", second_number = "";
 
-string get_input();							 // Done.
-string make_lowerCase(string message);		 // Done.
-bool check_spaces_in_input(string equation); // Done.
-void split_input(string equation);			 // Done.
-bool check_numbers(string number);			 // Done.
-bool check_operator(string _operator_);		 // Done.
-bool check_backslach(string number);		 // Done.
-double mini_split(string nuber);			 // Done.
-void program();								 // Done.
+string get_input();
+string make_lowerCase(string message);
+bool check_spaces_in_input(string equation);
+void split_input(string equation);
+bool check_numbers(string number);
+bool check_operator(string _operator_);
+bool check_backslach(string number);
+double mini_split(string number);
+void program();
 
+// This Function is Converting from (Floating Porint Number a.b) to  (Rational Number a/b).
 void as_fraction(double number, int cycles = 10, double precision = 5e-4)
 {
 	int sign = number >= 0 ? 1 : -1;
@@ -97,8 +109,7 @@ bool check_spaces_in_input(string equation)
 
 void split_input(string equation)
 {
-	int i = 0;
-
+	int i = 0; // We Define the counter out the loop because we want to use the last value of it in many loops.
 	for (; i < equation.length(); i++)
 	{
 		if (equation[i] != ' ')
@@ -140,7 +151,7 @@ void split_input(string equation)
 bool check_numbers(string number)
 {
 	bool checker = true;
-	if (number[0] == '-')
+	if (number[0] == '-') // Check if the Number is Negative or not.
 	{
 		for (int i = 1; i < number.length(); i++)
 		{
@@ -161,7 +172,7 @@ bool check_numbers(string number)
 			}
 		}
 	}
-	else if (isdigit(number[0]))
+	else if (isdigit(number[0])) // Check the Hole Number.
 	{
 		for (int i = 0; i < number.length(); i++)
 		{
@@ -201,6 +212,7 @@ bool check_operator(string _operator_)
 	}
 }
 
+// Check if the Number is Rational Number or Integer number.
 bool check_backslach(string number)
 {
 	bool checker = false;
@@ -215,6 +227,7 @@ bool check_backslach(string number)
 	return checker;
 }
 
+// Split the Number into 3 peaces 1- nominator 2- Operator 3-denominator, to calc the Number.
 double mini_split(string number)
 {
 	double result;
@@ -255,12 +268,11 @@ double mini_split(string number)
 void program()
 {
 	cout << "Ahlan ya user ya habeby, Please Enter Your Calculation as Follows => "
-		 << "{Number 1 => (+ , - , / , *) => Number 2}."
-		 << "\n";
-	cout << "There have to be Spaces between the First Number, the operation and the Second Number then Enter.\n"
+		 << "{Number 1 => (+ , - , / , *) => Number 2}.\n"
+		 << "There have to be Spaces between the First Number, the operation and the Second Number then Enter.\n"
 		 << "Numbers can be Rationals as (x/y) or Integers as (z).\n";
 	string equation;
-	bool num1_stat, num2_stat, operation_stat;
+	bool num1_status, num2_status, operation_status;
 	long double number1, number2, result;
 	while (true)
 	{
@@ -273,10 +285,10 @@ void program()
 		else if (check_spaces_in_input(equation))
 		{
 			split_input(equation);
-			num1_stat = check_numbers(first_number);
-			num2_stat = check_numbers(second_number);
-			operation_stat = check_operator(_operator_);
-			if (num1_stat && num2_stat && operation_stat)
+			num1_status = check_numbers(first_number);
+			num2_status = check_numbers(second_number);
+			operation_status = check_operator(_operator_);
+			if (num1_status && num2_status && operation_status)
 			{
 				number1 = mini_split(first_number);
 				number2 = mini_split(second_number);
